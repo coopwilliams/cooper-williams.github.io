@@ -8,8 +8,8 @@ placeholder
 ### Groa
 #### Open source, NLP-based movie discovery system
 <figure>
-	<a href="https://vimeo.com/397993197"><img src="https://vimeo.com/397993197"></a>
-	<figcaption><title="Live Demo of web prototype by the author.</a>.</figcaption>
+	<a href="https://youtu.be/-XXOhunofT8"><img src="https://youtu.be/-XXOhunofT8"></a>
+	<figcaption><title="Live Demo of web prototype by the author and a co-conspirator.</a>.</figcaption>
 </figure>
 
 
