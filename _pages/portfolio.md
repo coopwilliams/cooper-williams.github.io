@@ -14,7 +14,7 @@ placeholder
 
 Gróa is a movie recommender system that lets users upload their own data to interactively receive movie recommendations. I worked on this project as lead ML engineer, building the core functionality around Gensim's Word2Vec and Doc2Vec algorithms. I trained Word2Vec on positive user ratings histories to create a user-based collaborative filtering recommender, which I validated using [users' watchlists](https://letterboxd.com/tabula_rasta/watchlist/). I also helped with scraping IMDb's entire reviews database, conducted market research, and designed much of the front-end for the prototype.
 
-This project is still in development by a team of data scientists and web developers. You can check it out at [groa.us](www.groa.us). Be aware, though, that the latest iteration of the project may not have all the features shown in the video above.
+This project is still in development by a team of data scientists and web developers. You can check it out at [groa.us](https://www.groa.us/). Be aware, though, that the latest iteration of the project may not have all the features shown in the video above.
 
 ### Thinkful Data Analytics Video Curriculum
 <figure>
@@ -23,7 +23,7 @@ This project is still in development by a team of data scientists and web develo
 	</figcaption>
 </figure>
 
-In Q4 2019, I wrote and produced a full suite of lecture and demo videos for Thinkful's online Data Analytics program. My lessons covered Python, Excel, SQL, Tableau, statistics, data visualization, and BI techniques.
+In Q4 2019, I wrote and produced a full suite of lecture and demo videos for Thinkful's online [Data Analytics program](https://www.thinkful.com/bootcamp/data-analytics/flexible/). My lessons covered Python, Excel, SQL, Tableau, statistics, data visualization, and BI techniques.
 
 ### Camera Price Predictor - a tool for exploring the relationship between camera prices and features
 
