@@ -26,8 +26,8 @@ search: true
 
 # Build settings
 markdown: kramdown
-# remote_theme: mmistakes/minimal-mistakes
-theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.19.1"
+# theme: minimal-mistakes-jekyll
 
 
 # Outputting
