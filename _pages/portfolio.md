@@ -2,8 +2,6 @@
 permalink: /portfolio/
 title: "Portfolio"
 ---
-placeholder
-
 
 ### Gróa - an open source, NLP-based movie discovery system
 <figure>
