@@ -9,7 +9,8 @@ placeholder
 #### Open source, NLP-based movie discovery system
 <figure>
 	<a href="https://youtu.be/-XXOhunofT8"><img src="https://youtu.be/-XXOhunofT8"></a>
-	<figcaption><title="Live Demo of web prototype by the author and a co-conspirator.</a>.</figcaption>
+	<figcaption><title="Live Demo of web prototype by the author and a co-conspirator.>
+	</figcaption>
 </figure>
 
 
