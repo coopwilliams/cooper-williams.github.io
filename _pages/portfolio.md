@@ -4,7 +4,7 @@ title: "Portfolio"
 ---
 
 
-# My skills include:
+### My skills include:
 Data science/software engineering - Python (Pandas, NumPy, Scikit-Learn, Keras, fast.ai, Gensim, Django, Flask, Dash), PostgreSQL, SQLite, MongoDB, HBase, Docker, AWS (EC2, ECR, RDS, Sagemaker), Excel, Tableau, Rust, Scheme, Git, Agile.
 
 Other - Adobe Creative Suite, videography, technical communication.
