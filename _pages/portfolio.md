@@ -3,6 +3,13 @@ permalink: /portfolio/
 title: "Portfolio"
 ---
 
+
+# My skills include:
+Data science/software engineering - Python (Pandas, NumPy, Scikit-Learn, Keras, fast.ai, Gensim, Django, Flask, Dash), PostgreSQL, SQLite, MongoDB, HBase, Docker, AWS (EC2, ECR, RDS, Sagemaker), Excel, Tableau, Rust, Scheme, Git, Agile.
+
+Other - Adobe Creative Suite, videography, technical communication.
+
+
 ### Gróa - an open source, NLP-based movie discovery system
 <figure>
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/-XXOhunofT8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
