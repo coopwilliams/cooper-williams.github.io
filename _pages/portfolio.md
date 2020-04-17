@@ -32,8 +32,4 @@ In Q4 2019, I wrote and produced a full suite of lecture and demo videos for Thi
 
 ### Camera Price Predictor - a tool for exploring the relationship between camera prices and features
 
-placeholder
-
-### COVID News Analysis - scoring news outlets on proactive and responsible COVID reporting
-
-placeholder
+This web app predicts the price of a hypothetical (pre-2008) digital camera with a set of user-defined features. I built it using Dash and Scikit-Learn's random forest regressor. [View the code here.](https://github.com/coopwilliams/camera_prices)
