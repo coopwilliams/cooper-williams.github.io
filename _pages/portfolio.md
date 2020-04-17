@@ -10,7 +10,7 @@ title: "Portfolio"
 	</figcaption>
 </figure>
 
-Gróa is a movie recommender system that lets users upload their own data to interactively receive movie recommendations. I worked on this project as lead ML engineer, building the core functionality around Gensim's Word2Vec and Doc2Vec algorithms. I trained Word2Vec on positive user ratings histories to create a user-based collaborative filtering recommender, which I validated using [users' watchlists](https://letterboxd.com/tabula_rasta/watchlist/). I also helped with scraping IMDb's entire reviews database, conducted market research, and designed much of the front-end for the prototype.
+Gróa is a movie recommender system that lets users upload their own data to interactively receive movie recommendations. I worked on this project as lead ML engineer, building the core functionality around Gensim's Word2Vec and Doc2Vec algorithms. I trained Word2Vec on positive user ratings histories to create a user-based collaborative filtering recommender, which I validated using user watchlists. Visit [here](https://projector.tensorflow.org/?config=https://raw.githubusercontent.com/coopwilliams/w2v_movie_projector/master/projector_config_top_10k.json) to play around with a visualization of the vector embeddings. I also helped with scraping IMDb's entire reviews database, conducted market research, and designed much of the front-end for the prototype.
 
 This project is still in development by a team of data scientists and web developers. You can check it out at [groa.us](https://www.groa.us/). Be aware, though, that the latest iteration of the project may not have all the features shown in the video above.
 
