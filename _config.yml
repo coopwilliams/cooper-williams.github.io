@@ -17,7 +17,7 @@ title: Tacit Warehouse
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   Data science + boundless curiosity.
-twitter_username: thecoopwilliams
+# twitter_username:
 github_username: coopwilliams
 minimal_mistakes_skin: dirt
 search: true
@@ -66,9 +66,9 @@ author:
 #     - label: "Website"
 #       icon: "fas fa-fw fa-link"
 #       url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/thecoopwilliams"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: 
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/coopwilliams"
@@ -76,9 +76,9 @@ author:
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/thecoopwilliams"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: 
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/coopwilliams"
