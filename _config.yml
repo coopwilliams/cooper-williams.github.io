@@ -61,7 +61,7 @@ plugins:
 author:
   name   : "Cooper Williams"
   avatar : "/assets/images/bio_photo.jpg"
-  bio    : "Data scientist, practical generalist. Interested in software, complex systems, and embodied rationality."
+  bio    : "Data scientist, practical generalist. Interested in complex systems, embodied rationality, and long-term outcomes."
   links:
 #     - label: "Website"
 #       icon: "fas fa-fw fa-link"
