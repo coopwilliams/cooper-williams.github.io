@@ -17,15 +17,17 @@ In 2020, I got to pick up a proverbial $20 bill off the sidewalk. That is, I hel
 
 From a machine learning perspective, a few hundred movie ratings should be pretty indicative of someone's taste. It's at least enough to generate some strong candidates for your next movie to watch. Of course, there are plenty of movie recommender systems out there already. But they're coupled with IP silos and not really user-driven. Amazon Prime will steer you towards movies they have rights to. Netflix optimizes for time spent on the platform. These platforms can't learn from your whole movie history, nor help you find a diamond in the rough.
 
-So our goal was simple: build the movie recommender that we would want to use. Let me export my Letterboxd data, upload it to a web app, and get bottomless movie recommendations from all 538,353 movies on IMDb. To do that, we built a scraper that collected every IMDb movie review into our database (about 3.4 million reviews). Then I set about training models on the data. 
+So our goal was simple: build the movie recommender that we would want to use. Let me export my Letterboxd data, upload it to a web app, and get bottomless movie recommendations from all 538,353 movies on IMDb. To do that, we built a scraper that collected every IMDb movie review into our database (about 3.4 million reviews). Then I set about training models on the data, using multiple metrics to score the models' performance on my friends' watch histories. The result was incredible. Once we had deployed the best model in a web app, I had a blast interacting with the system and exploring movie recommendations. The model recommended movies that I was actually interested in, and responded to positive and negative feedback with updated recommendations. 
 
-The code below is an edited version of the iPython notebook I put together for the team that would take over the project. Though it's only been a few months, I recognize a lot of things I would do differently now. The predictor itself is a kind of antipattern called a "God object" where all the useful methods are stuffed in. That's a nightmare for code readability and maintainability. Someday I'll go back and rewrite this thing with actual design patterns. For now, I post it as example of what kind of recommender systems can be achieved using Word2Vec. I try to explain my decisions as I go and offer guidance for those who would try to replicate the results. The original .ipynb file can be found on GitHub, [here](https://github.com/coopwilliams/Groa/blob/master/SageMaker/Word2Vec_train_test.ipynb).
+The code below is an edited version of the iPython notebook I put together for the team that would take over the project. Though it's only been a few months, I recognize a lot of things I would do differently now. The predictor itself is a kind of antipattern called a "God object" where all the useful methods are stuffed in. That's a nightmare for code readability and maintainability. Someday I'll go back and rewrite this thing with actual design patterns. For now, I post it as example of what kind of recommender systems can be achieved using Word2Vec. I try to explain my decisions as I go and offer guidance for those who would try to replicate the results. The original .ipynb file can be found on GitHub [here](https://github.com/coopwilliams/Groa/blob/master/SageMaker/Word2Vec_train_test.ipynb).
 
-# The Basic Idea
+# The Theory
 
-The core model for our app was built around Gensim's Word2Vec algorithm. I won't try to explain Word2Vec in-depth, since there are so many good [articles](https://www.knime.com/blog/word-embedding-word2vec-explained) (and [this video](https://youtu.be/QyrUentbkvw)) readily available. But the simple version is this: Word2Vec is a neural network technique for relating words to their context. Once it's trained on a corpus of natural language text, it can either predict the next word in a sentence, or predict the sentence a word came from. If you have data on the products users like (e.g. movies rated positively), you can pass each user's history to the network, treating each product as a word. The network learns, in shocking detail, which products tend to be liked by the same user.
+The core model for our app was built around Gensim's Word2Vec algorithm. I won't try to explain Word2Vec in-depth, since there are so many good [articles](https://www.knime.com/blog/word-embedding-word2vec-explained) (and [this video](https://youtu.be/QyrUentbkvw)) readily available. 
 
+The simple version is this: Word2Vec is a neural network technique for relating words to their context. Once it's trained on a corpus of natural language text, it can either predict the next word in a sentence, or predict the sentence a word came from. If you have data on the products users like (e.g. movies rated positively), you can pass each user's history to the network, treating each product as a word. The network learns, in shocking detail, which products tend to be liked by the same user.
 
+As always with machine learning models, the details make all the difference. In the notebook, I discuss the construction of training data, the importance of tuning hyperparameters, and the various tests one can throw at the model. I had to iterate through many configurations to get a model that gave consistently good recommendations.
 
 # The Notebook
 
@@ -145,19 +147,13 @@ This is because the reviews were inserted into the database by multiple scrapers
 running in parallel.
 
 Future users of this notebook should take care to note whether their database gives
-the same result. The reason the order is important is that Word2Vec trains by learning to predict the movies
-within a 10-movie window. A non-random ordering may introduce a bias. That bias might improve the model, e.g. 
-in the case where training data is sorted by review date. For all our initial models, however, we have elected
-not to pursue that approach. 
+the same result. The reason the order is important is that Word2Vec trains by learning to predict the movies within a 10-movie window. A non-random ordering may introduce a bias. That bias might improve the model, e.g. in the case where training data is sorted by review date. For all our initial models,however, we have elected not to pursue that approach. 
 
 There are two reasons for this:
-1. Ultimately, the user "taste vector" that is the input for making recommendations is
-a vector average of all the movies the user has watched, so it's not perfectly analogous to finding similar movies
-to a single movie.
-2. More importantly, sorting the training data by review date would influence the model to associate movies
-according to the order people watch them in. This has pros and cons. We don't want to provide recommendations 
-that lead a user down a path that others have trodden, and this would seem to be one potential drawback. But further
-testing is needed. It might be a great idea.
+
+1. Ultimately, the user "taste vector" that is the input for making recommendations is a vector average of all the movies the user has watched, so it's not perfectly analogous to finding similar movies to a single movie.
+
+2. More importantly, sorting the training data by review date would influence the model to associate movies according to the order people watch them in. This has pros and cons. We don't want to provide recommendations that lead a user down a path that others have trodden, and this would seem to be one potential drawback. But further testing is needed. It might be a great idea.
 
 
 ```python
@@ -297,26 +293,7 @@ df.shape
     
 
     Requirement already satisfied: gensim in c:\users\cooper\anaconda3\lib\site-packages (3.8.1)
-    Requirement already satisfied: scipy>=0.18.1 in c:\users\cooper\anaconda3\lib\site-packages (from gensim) (1.2.1)
-    Requirement already satisfied: six>=1.5.0 in c:\users\cooper\appdata\roaming\python\python37\site-packages (from gensim) (1.11.0)
-    Requirement already satisfied: numpy>=1.11.3 in c:\users\cooper\anaconda3\lib\site-packages (from gensim) (1.16.4)
-    Requirement already satisfied: smart-open>=1.8.1 in c:\users\cooper\anaconda3\lib\site-packages (from gensim) (1.9.0)
-    Requirement already satisfied: boto>=2.32 in c:\users\cooper\anaconda3\lib\site-packages (from smart-open>=1.8.1->gensim) (2.49.0)
-    Requirement already satisfied: requests in c:\users\cooper\appdata\roaming\python\python37\site-packages (from smart-open>=1.8.1->gensim) (2.20.1)
-    Requirement already satisfied: boto3 in c:\users\cooper\anaconda3\lib\site-packages (from smart-open>=1.8.1->gensim) (1.11.14)
-    Requirement already satisfied: chardet<3.1.0,>=3.0.2 in c:\users\cooper\anaconda3\lib\site-packages (from requests->smart-open>=1.8.1->gensim) (3.0.4)
-    Requirement already satisfied: idna<2.8,>=2.5 in c:\users\cooper\appdata\roaming\python\python37\site-packages (from requests->smart-open>=1.8.1->gensim) (2.7)
-    Requirement already satisfied: urllib3<1.25,>=1.21.1 in c:\users\cooper\anaconda3\lib\site-packages (from requests->smart-open>=1.8.1->gensim) (1.24.2)
-    Requirement already satisfied: certifi>=2017.4.17 in c:\users\cooper\anaconda3\lib\site-packages (from requests->smart-open>=1.8.1->gensim) (2019.6.16)
-    Requirement already satisfied: jmespath<1.0.0,>=0.7.1 in c:\users\cooper\appdata\roaming\python\python37\site-packages (from boto3->smart-open>=1.8.1->gensim) (0.9.4)
-    Requirement already satisfied: botocore<1.15.0,>=1.14.14 in c:\users\cooper\anaconda3\lib\site-packages (from boto3->smart-open>=1.8.1->gensim) (1.14.14)
-    Requirement already satisfied: s3transfer<0.4.0,>=0.3.0 in c:\users\cooper\anaconda3\lib\site-packages (from boto3->smart-open>=1.8.1->gensim) (0.3.3)
-    Requirement already satisfied: python-dateutil<3.0.0,>=2.1 in c:\users\cooper\anaconda3\lib\site-packages (from botocore<1.15.0,>=1.14.14->boto3->smart-open>=1.8.1->gensim) (2.8.0)
-    Requirement already satisfied: docutils<0.16,>=0.10 in c:\users\cooper\anaconda3\lib\site-packages (from botocore<1.15.0,>=1.14.14->boto3->smart-open>=1.8.1->gensim) (0.14)
-    
-
-    WARNING: You are using pip version 20.0.1; however, version 20.0.2 is available.
-    You should consider upgrading via the 'C:\Users\Cooper\Anaconda3\python.exe -m pip install --upgrade pip' command.
+    ....
     
 
 
@@ -356,8 +333,7 @@ pickle.dump(watched_train, open(f'training_data/watched_train_{m}-10_{n}reviews_
 
 ## Train the Model
 
-Small note:
-The first version of this model was trained on movie IDs that were inside lists of length 1, with watch histories being lists of lists. This version eschews the inner lists. Each watch history is simply a list of strings.
+We use Gensim to train a Word2Vec model.
 
 
 ```python
@@ -435,7 +411,13 @@ model.save("models/w2v_limitingfactor_v3.36.model")
 # !pip install gensim==3.8.1
 ```
 
-### Define inferencing functions
+### Build the predictor
+
+**Note: This code does the heavy lifting in the end application. As I noted above, it's not maintainable or pythonic to have a single class containing all your prediction methods (a "God object"). If you're a beginner like me, study design patterns that break the functionality down into extensible pieces. But the worst hubris I committed here is hardcoding a polynomial to weight movies with extreme ratings.**
+
+First we define some helper functions that standardize the data the user gives us. We had to deal with both IMDb data and Letterboxd data, which provide different fields. Of particular difficulty was the fact that Letterboxd doesn't provide the IMDb movie IDs that comprise our model's vocabulary. So we use the function `df_to_id_list()` to match a movie's title and year to an ID in the database. `prep_data()` separates the user's data into lists of IDs (tokens) that the model can recognize and make inferences on. 
+
+The `Recommender` object gets its own database connection. The `predict()` method does most of the work, using the lists generated by `prep_data()` to improve the quality of recommendations. We can subtract the average of disliked movies from the average of liked movies. We can give extra importance to movies with extreme ratings. Crucially, we can ensure that the user doesn't get recommendations they've already seen.
 
 
 ```python
@@ -596,6 +578,7 @@ def prep_data(ratings_df, watched_df=None, watchlist_df=None,
     else: val_list = []
 
     return (good_list, bad_list, hist_list, val_list, ratings_dict)
+
 
 class Recommender(object):
 
