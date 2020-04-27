@@ -10,6 +10,7 @@ tags:
   - ipynb
   - projects 
 ---
+__A guided tour of the most cultured open source movie recommender to date.__ 
 
 # The Backstory
 
