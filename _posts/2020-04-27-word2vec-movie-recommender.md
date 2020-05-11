@@ -1,6 +1,6 @@
 ---
 title: "Building a Collaborative Filtering Movie Recommender with Word2Vec"
-last_modified_at: 2020-04-26T16:20:02-05:00
+last_modified_at: 2020-04-26T16:20:02-06:00
 categories:
   - Blog
 tags:
